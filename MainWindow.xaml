@@ -1,0 +1,103 @@
+﻿<Window x:Class="RayBin.FishImageLabel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:RayBin.FishImageLabel" 
+        mc:Ignorable="d" Title="MainWindow" WindowStyle="None" Style="{StaticResource MainWindow}" 
+        WindowStartupLocation="CenterScreen" SizeChanged="Window_SizeChanged" Closing="Window_Closing" KeyUp="Window_KeyUp" Loaded="Window_Loaded">
+    <Window.CommandBindings>
+        <CommandBinding Command='ApplicationCommands.Help' Executed='HelpExecuted' />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition  />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TopArea" Grid.Row="0" Background="{StaticResource TopAreaBackColor}">
+            <Grid.ContextMenu>
+                <ContextMenu x:Name="NotifyIconMenu" Background="White">
+                    <Controls:NotifyIconMenu x:Name="MenuAbout" Header="关于" IconColor="#009CCC" Icon="{StaticResource IconAbout}" Click="MenuAboutClick" />
+                    <Controls:NotifyIconMenu x:Name="MenuShowMainWindow" Header="显示主窗体" IconColor="#B4009E" Icon="{StaticResource IconRestore}" Click="MenuShowMainWindowClick" />
+                    <Controls:NotifyIconMenu x:Name="MenuExit" Header="退出" IconColor="#CD293D"  Icon="{StaticResource IconExit}" Click="MenuExitClick" />
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="260" />                
+                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="25,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                <Image Source="/Resources/App.png"  Width="32" Height="32" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBlock Margin="0,0,0,0" VerticalAlignment="Center"  FontSize="17" Foreground="{DynamicResource TitleButtonColor}" Text="FISH Image Label" />
+            </Grid>            
+            <Grid Grid.Column="2">
+                <Label MouseDoubleClick="WindowState_MouseDoubleClick" Height="60" />
+            </Grid>
+            <Grid Grid.Column="3" VerticalAlignment="Center">
+                <Controls:IconButton x:Name="ComposeButton" HorizontalAlignment="Left" IconText="" IconWidth="20" IconHeight="20" VerticalAlignment="Center" Margin="0,0,10,0" ToolTip="荧光点标注" Click="ComposeButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconCompose}" />
+                <Controls:IconButton x:Name="SelectAreaButton" HorizontalAlignment="Left" IconText="" IconWidth="20" IconHeight="20" VerticalAlignment="Center" Margin="50,0,10,0" ToolTip="选择区域" Click="SelectAreaButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconRectangle}" />
+                <Controls:IconButton x:Name="SinglePointLabelButton" HorizontalAlignment="Left" IconText="" IconWidth="23" IconHeight="23" VerticalAlignment="Center" Margin="100,0,10,0" ToolTip="单点标注" Click="SinglePointLabelButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconManualColoring}" />
+                <Controls:IconButton x:Name="LineLabelButton" HorizontalAlignment="Left" IconText="" IconWidth="22" IconHeight="22" VerticalAlignment="Center" Margin="150,0,10,0" ToolTip="画线标注" Click="LineLabelButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconLine}" />               
+                <Controls:IconButton x:Name="ManualLabelButton" HorizontalAlignment="Left" IconText="" IconWidth="20" IconHeight="20" VerticalAlignment="Center" Margin="200,0,10,0" ToolTip="手动标注" Click="ManualLabelButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconPencil}" />
+                <Controls:IconButton x:Name="ConfigButton" HorizontalAlignment="Left" IconText="" Width="42" IconWidth="21" IconHeight="22" VerticalAlignment="Center" Margin="250,0,10,0" ToolTip="系统设置" Click="ConfigButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconConfig}" />            
+            </Grid>
+            <Grid Grid.Column="4" VerticalAlignment="Center">
+                <Controls:IconButton x:Name="SupportButton" HorizontalAlignment="Left" IconText="" IconWidth="16" IconHeight="16" VerticalAlignment="Center" Margin="0,0,10,0" ToolTip="技术支持" Click="SupportButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconEmail}" />
+                <Controls:IconButton x:Name="ChangeSkinButton" HorizontalAlignment="Left" IconText="" IconWidth="18" IconHeight="16" VerticalAlignment="Center" Margin="40,0,0,0" ToolTip="换肤" Click="ChangeSkinButton_Click" Foreground="{DynamicResource TitleButtonColor}" MouseOverColor="{DynamicResource TitleButtonMouseOverColor}" Icon="{StaticResource IconSkin}" />
+                <Line HorizontalAlignment="Right" Margin="0,0,120,0" X1="13" Y1="4" X2="13" Y2="23" Stroke="{DynamicResource TitleButtonColor}" Opacity="0.8"  StrokeThickness="1"></Line>
+                <Button x:Name="MinimizeButton" HorizontalAlignment="Right" Margin="0,0,85,0" VerticalAlignment="Center" Style="{StaticResource SystemMinButton}" ToolTip="最小化" Click="MinimizeButton_Click" />
+                <Button x:Name="MaxRestoreButton" HorizontalAlignment="Right" Margin="0,0,50,0" VerticalAlignment="Center" Style="{StaticResource SystemMaxRestoreButton}" ToolTip="最大化" Click="MaxRestoreButton_Click"  />
+                <Button x:Name="CloseButton" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" Style="{StaticResource SystemCloseButton}" ToolTip="关闭" Click="MainWindowClose" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" MinWidth="260" MaxWidth="600" />
+                <ColumnDefinition Width="5"  />
+                <ColumnDefinition Width="*" />                
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition  />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Label x:Name="PageTitle" Content="荧光点标注" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="20" Width="Auto" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="DirectoryButton" Content="目录选择" Margin="10,10,0,11" Width="80" Height="28"  BorderThickness="1" HorizontalAlignment="Left" Foreground="{DynamicResource ButtonColor}" Background="{DynamicResource ButtonBackColor}"  BorderBrush="{DynamicResource ButtonBorderColor}" Click="DirectoryButton_Click" />
+                    <Button x:Name="OpenDirectoryButton" Content="打开目录" Margin="100,10,0,11" Width="80" Height="28"  BorderThickness="1" HorizontalAlignment="Left" Foreground="{DynamicResource ButtonColor}" Background="{DynamicResource ButtonBackColor}"  BorderBrush="{DynamicResource ButtonBorderColor}" Click="OpenDirectoryButton_Click" />
+                    <Button x:Name="DeleteButton" Content="删除文件" Margin="190,10,0,11" Width="80" Height="28"  BorderThickness="1" HorizontalAlignment="Left" Foreground="{DynamicResource ButtonColor}" Background="{DynamicResource ButtonBackColor}"  BorderBrush="{DynamicResource ButtonBorderColor}" Click="DeleteButton_Click" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TreeView Name="FileTreeView" VirtualizingStackPanel.IsVirtualizing="False" SelectedItemChanged="FileTreeView_SelectedItemChanged" Background="Transparent"  Margin="10,0,0,10">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="Padding" Value="0,5,0,5"/>
+                                <Setter Property="Foreground" Value="{DynamicResource TreeViewForeColor}"></Setter>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding NodeIcon}" Width="16" Height="16" />
+                                    <TextBlock Margin="5,0,0,0" Text="{Binding Title}" Foreground="{DynamicResource TreeViewForeColor}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,100,0,0" Background="{StaticResource RightAreaBackColor}" />
+            <Grid x:Name="RightArea" Grid.Column="2">
+                <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

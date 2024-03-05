@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MainWindow" TargetType="{x:Type Window}">
+        <Setter	Property="AllowsTransparency" Value="True" />
+        <Setter	Property="WindowStyle" Value="None" />
+        <Setter	Property="BorderThickness" Value="8" />
+        <Setter	Property="Width" Value="1500" />
+        <Setter	Property="Height" Value="1050" />
+        <Setter	Property="MinWidth" Value="1300" />
+        <Setter	Property="MinHeight" Value="1000" />        
+        <Setter	Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter	Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter	Property="UIElement.Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.3"	Color="#FFBCBCBC" />
+            </Setter.Value>
+        </Setter>
+        <Setter	Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border x:Name="Template" Panel.ZIndex="0" Padding="{TemplateBinding Margin}"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
