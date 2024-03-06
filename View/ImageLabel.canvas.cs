@@ -80,6 +80,12 @@ namespace RayBin.FishImageLabel
         {
             sizeLabel.Visibility = Visibility.Hidden;
             CanvasMain.Cursor = Cursors.Arrow;
+            if (dragStart == 4) 
+            { 
+                LineClear(CanvasMain); 
+                tempLine.Visibility = Visibility.Hidden; 
+                points.Clear(); 
+            }
             dragStart = 0;
         }
         #endregion
