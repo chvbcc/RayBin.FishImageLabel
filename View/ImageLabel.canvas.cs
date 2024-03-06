@@ -259,12 +259,10 @@ namespace RayBin.FishImageLabel
                         // 在这里闭合线段并转换成多边形
                         LineClear(canvasMain);
                         tempLine.Visibility = Visibility.Hidden;
-                        Polygon polygon = new Polygon { Stroke = new SolidColorBrush(borderColor), StrokeThickness = width, Fill = Brushes.Transparent };
+                        Polygon polygon = new Polygon { Stroke = new SolidColorBrush(borderColor), StrokeThickness = width, Fill = Brushes.Transparent, SnapsToDevicePixels = true };
                         polygon.MouseLeftButtonDown += PolygonMouseLeftButtonDown;
                         foreach (var point in points) { polygon.Points.Add(point); }
                         canvasMain.Children.Add(polygon);
-                        Canvas.SetTop(polygon, -1);
-                        Canvas.SetLeft(polygon, -1);
                         selectedPolygon = polygon;
                         SelectedLabel(polygon);
                         points.Clear();
@@ -273,7 +271,7 @@ namespace RayBin.FishImageLabel
                     else
                     {
                         //接着画线
-                        Line line = new Line { Stroke = new SolidColorBrush(borderColor), StrokeThickness = width, X1 = points[points.Count - 2].X, Y1 = points[points.Count - 2].Y, X2 = mousePoint.X, Y2 = mousePoint.Y };
+                        Line line = new Line { Stroke = new SolidColorBrush(borderColor), StrokeThickness = width, X1 = points[points.Count - 2].X, Y1 = points[points.Count - 2].Y, X2 = mousePoint.X, Y2 = mousePoint.Y, SnapsToDevicePixels = true };
                         canvasMain.Children.Add(line);
                     }
                 }
